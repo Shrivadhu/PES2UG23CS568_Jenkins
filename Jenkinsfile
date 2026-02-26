@@ -33,8 +33,11 @@ pipeline {
                   --name nginx-lb \
                   --network app-network \
                   -p 80:80 \
-                  -v $(pwd)/nginx/default.conf:/etc/nginx/conf.d/default.conf \
                   nginx
+
+                docker cp nginx/default.conf nginx-lb:/etc/nginx/conf.d/default.conf
+
+                docker restart nginx-lb
                 '''
             }
         }
